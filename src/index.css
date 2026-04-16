@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    color: #111111;
+    background: #ffffff;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  h1, h2, h3, h4, h5 {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-kh-black text-white px-6 py-3 font-body font-600 tracking-wide
+           hover:bg-gray-800 transition-colors duration-200 text-sm uppercase;
+  }
+  .btn-outline {
+    @apply border border-kh-black text-kh-black px-6 py-3 font-body font-500 tracking-wide
+           hover:bg-kh-black hover:text-white transition-all duration-200 text-sm uppercase;
+  }
+  .size-btn {
+    @apply w-12 h-10 border text-xs font-semibold uppercase tracking-wide
+           transition-all duration-150 flex items-center justify-center;
+  }
+  .size-btn-active {
+    @apply bg-kh-black text-white border-kh-black;
+  }
+  .size-btn-inactive {
+    @apply bg-white text-kh-black border-kh-border hover:border-kh-black;
+  }
+  .size-btn-unavailable {
+    @apply bg-kh-gray text-kh-muted border-kh-border cursor-not-allowed line-through;
+  }
+  .input-field {
+    @apply w-full border border-kh-border px-4 py-2.5 text-sm focus:outline-none focus:border-kh-black
+           transition-colors duration-150 bg-white;
+  }
+  .label {
+    @apply block text-xs font-semibold uppercase tracking-widest text-kh-muted mb-1.5;
+  }
+}
+
+/* Marquee animation */
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 30s linear infinite;
+}
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* Product image hover — uses data attributes to avoid :last-child DOM ordering issues */
+.img-primary {
+  transition: opacity 0.4s ease;
+}
+.img-secondary {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.product-img-wrap:hover .img-primary {
+  opacity: 0;
+}
+.product-img-wrap:hover .img-secondary {
+  opacity: 1;
+}
+
+/* Cart slide */
+.cart-panel {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: #f5f5f5; }
+::-webkit-scrollbar-thumb { background: #ccc; border-radius: 2px; }
+::-webkit-scrollbar-thumb:hover { background: #999; }
+
+/* Admin table */
+.admin-table th {
+  @apply text-xs font-semibold uppercase tracking-widest text-kh-muted
+         py-3 px-4 text-left border-b border-kh-border bg-kh-gray;
+}
+.admin-table td {
+  @apply py-3 px-4 text-sm border-b border-kh-border;
+}
